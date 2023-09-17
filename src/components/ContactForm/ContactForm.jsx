@@ -5,7 +5,7 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 import { nanoid } from 'nanoid';
 import s from './ContactForm.module.css';
 
-const ContactForm = ({ handleSubmitForm, contacts }) => {
+const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -37,21 +37,19 @@ const ContactForm = ({ handleSubmitForm, contacts }) => {
   return (
     <form onSubmit={handleFormCompilation} className={s.form}>
       <label className={s.label}>
-        {/* <p className={s.text}>Name</p> */}
         <input
           type="text"
           name="name"
           className={s.input}
           placeholder="Name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Name Lastname"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={name}
           onChange={handleChangeInput}
         />
       </label>
       <label className={s.label}>
-        {/* <p className={s.text}>Number</p> */}
         <input
           type="tel"
           name="number"
