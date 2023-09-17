@@ -1,12 +1,16 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from 'redux/contacts/items/ItemsActions';
 import { Report } from 'notiflix/build/notiflix-report-aio';
+import { nanoid } from 'nanoid';
 import s from './ContactForm.module.css';
 
 const ContactForm = ({ handleSubmitForm, contacts }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const contacts = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
 
   const handleChangeInput = e => {
     const input = e.target;
@@ -22,7 +26,7 @@ const ContactForm = ({ handleSubmitForm, contacts }) => {
       el => el.name.toLowerCase() === name.toLowerCase()
     );
     if (!check) {
-      handleSubmitForm({ id, name, number });
+      dispatch(addItem({ id, name, number }));
       setName('');
       setNumber('');
     } else {
@@ -68,8 +72,3 @@ const ContactForm = ({ handleSubmitForm, contacts }) => {
 };
 
 export default ContactForm;
-
-ContactForm.propTypes = {
-  handleSubmitForm: PropTypes.func.isRequired,
-  contacts: PropTypes.array.isRequired,
-};
